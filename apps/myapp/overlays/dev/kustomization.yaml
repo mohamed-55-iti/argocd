@@ -1,7 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 namespace: myapp-dev
 resources:
-- ../../base
-labels:
-- pairs:
-    env: dev
-  includeSelectors: false
+  - ../../base
+images:
+  - name: mohamed11755/cicd-app
+    newTag: "latest"
+patches:
+  - target:
+      kind: Service
+      name: myapp
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: NodePort
+      - op: add
+        path: /spec/ports/0/nodePort
+        value: 30091

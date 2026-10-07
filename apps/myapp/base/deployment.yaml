@@ -14,12 +14,19 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: nginx:1.27
+        image: mohamed11755/cicd-app
         ports:
-        - containerPort: 80
+        - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
         resources:
-          requests:
-            cpu: 50m
-            memory: 64Mi
-          limits:
-            memory: 128Mi
+          requests: { cpu: 50m, memory: 64Mi }
+          limits:   { cpu: 200m, memory: 128Mi }

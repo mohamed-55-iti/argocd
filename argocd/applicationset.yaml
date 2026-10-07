@@ -13,7 +13,7 @@ spec:
     metadata:
       name: 'myapp-{{env}}'
     spec:
-      project: myapp
+      project: default
       source:
         repoURL: https://github.com/mohamed-55-iti/argocd.git
         targetRevision: main
@@ -26,4 +26,4 @@ spec:
           prune: true
           selfHeal: true
         syncOptions:
-        - CreateNamespace=true
+          - CreateNamespace=true

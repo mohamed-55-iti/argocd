@@ -1,18 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 namespace: myapp-prod
 resources:
-- ../../base
-labels:
-- pairs:
-    env: prod
-  includeSelectors: false
+  - ../../base
 images:
-- name: nginx
-  newTag: "1.27.2"
+  - name: mohamed11755/cicd-app
+    newTag: "latest"
+replicas:
+  - name: myapp
+    count: 3
 patches:
-- target:
-    kind: Deployment
-    name: myapp
-  patch: |-
-    - op: replace
-      path: /spec/replicas
-      value: 3
+  - target:
+      kind: Service
+      name: myapp
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: NodePort
+      - op: add
+        path: /spec/ports/0/nodePort
+        value: 30092
