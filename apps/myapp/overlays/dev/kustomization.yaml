@@ -5,7 +5,10 @@ resources:
   - ../../base
 images:
   - name: mohamed11755/cicd-app
-    newTag: "4-d510030"
+    newTag: "2-6f38f36"
+replicas:
+  - name: myapp
+    count: 2
 patches:
   - target:
       kind: Service
@@ -17,3 +20,12 @@ patches:
       - op: add
         path: /spec/ports/0/nodePort
         value: 30091
+  - target:
+      kind: Deployment
+      name: myapp
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: APP_ENV
+            value: development
