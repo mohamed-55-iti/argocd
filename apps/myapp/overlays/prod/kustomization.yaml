@@ -5,7 +5,7 @@ resources:
   - ../../base
 images:
   - name: mohamed11755/cicd-app
-    newTag: "2-6f38f36"
+    newTag: "3-d510030"
 replicas:
   - name: myapp
     count: 3
