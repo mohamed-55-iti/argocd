@@ -1,0 +1,7 @@
+namespace: myapp-dev
+resources:
+- ../../base
+labels:
+- pairs:
+    env: dev
+  includeSelectors: false

@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: myapp
+  namespace: argocd
+spec:
+  description: MyApp GitOps project
+  sourceRepos:
+  - https://github.com/mohamed-55-iti/argocd.git
+  destinations:
+  - server: https://kubernetes.default.svc
+    namespace: 'myapp-*'
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace

@@ -1,0 +1,18 @@
+namespace: myapp-prod
+resources:
+- ../../base
+labels:
+- pairs:
+    env: prod
+  includeSelectors: false
+images:
+- name: nginx
+  newTag: "1.27.2"
+patches:
+- target:
+    kind: Deployment
+    name: myapp
+  patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 3
